@@ -1,10 +1,10 @@
-#include "mainwindow.h"
+#include "isense.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
+    ISense w;
     w.show();
 
     return a.exec();
