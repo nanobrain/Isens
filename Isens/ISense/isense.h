@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QtGui>
 #include <QMessageBox>
+#include <QTableView>
+#include "sensorstabledialog.h"
 
 namespace Ui {
 class ISense;
@@ -19,9 +21,12 @@ public:
 
 private:
     Ui::ISense *ui;
+    SensorsTableDialog *sensorsTableDialog;
 
 public slots:
     void displayAbout();
+    void createSensorsTable();
+    void sensorsTableDialogClosed();
 
 };
 

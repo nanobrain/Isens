@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,11 +13,14 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        isense.cpp
+        isense.cpp \
+    sensorstabledialog.cpp
 
-HEADERS  += isense.h
+HEADERS  += isense.h \
+    sensorstabledialog.h
 
-FORMS    += isense.ui
+FORMS    += isense.ui \
+    sensorstabledialog.ui
 
 RESOURCES += \
     icons.qrc
