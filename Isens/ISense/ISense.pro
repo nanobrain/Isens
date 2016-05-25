@@ -18,3 +18,6 @@ SOURCES += main.cpp\
 HEADERS  += isense.h
 
 FORMS    += isense.ui
+
+RESOURCES += \
+    icons.qrc

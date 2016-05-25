@@ -12,3 +12,9 @@ ISense::~ISense()
 {
     delete ui;
 }
+
+void ISense::displayAbout()
+{
+    QMessageBox::about(this, tr("About"),
+        tr("Politechnika Wrocławska"));
+}

@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/Icons">
+        <file>Icons/Collapse.png</file>
+        <file>Icons/Connect.png</file>
+        <file>Icons/Disconnect.png</file>
+        <file>Icons/ErrorCircle.png</file>
+        <file>Icons/Exclamation.png</file>
+        <file>Icons/Expand.png</file>
+        <file>Icons/Status0.png</file>
+        <file>Icons/Status1.png</file>
+        <file>Icons/Status2.png</file>
+        <file>Icons/Status3.png</file>
+        <file>Icons/Table.png</file>
+        <file>Icons/Tick_Circle.png</file>
+        <file>Icons/Add.png</file>
+        <file>Icons/Delete.png</file>
+        <file>Icons/Exit.png</file>
+    </qresource>
+</RCC>

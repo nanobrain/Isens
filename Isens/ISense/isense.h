@@ -2,6 +2,8 @@
 #define ISENSE_H
 
 #include <QMainWindow>
+#include <QtGui>
+#include <QMessageBox>
 
 namespace Ui {
 class ISense;
@@ -17,6 +19,10 @@ public:
 
 private:
     Ui::ISense *ui;
+
+public slots:
+    void displayAbout();
+
 };
 
 #endif // ISENSE_H
