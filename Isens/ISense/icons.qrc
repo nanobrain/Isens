@@ -15,5 +15,7 @@
         <file>Icons/Add.png</file>
         <file>Icons/Delete.png</file>
         <file>Icons/Exit.png</file>
+        <file>Icons/Open.png</file>
+        <file>Icons/Save.png</file>
     </qresource>
 </RCC>
