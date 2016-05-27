@@ -2,6 +2,7 @@
 #define SENSORSTABLEDIALOG_H
 
 #include <QDialog>
+#include <QStandardItemModel>
 
 namespace Ui {
 class SensorsTableDialog;
