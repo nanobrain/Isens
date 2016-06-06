@@ -10,12 +10,13 @@
         <file>Icons/Status1.png</file>
         <file>Icons/Status2.png</file>
         <file>Icons/Status3.png</file>
-        <file>Icons/Table.png</file>
         <file>Icons/Tick_Circle.png</file>
         <file>Icons/Add.png</file>
         <file>Icons/Delete.png</file>
         <file>Icons/Exit.png</file>
         <file>Icons/Open.png</file>
         <file>Icons/Save.png</file>
+        <file>Icons/TableResults.png</file>
+        <file>Icons/TableSensors.png</file>
     </qresource>
 </RCC>
