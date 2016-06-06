@@ -14,10 +14,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         isense.cpp \
-    sensorstabledialog.cpp
+    sensorstabledialog.cpp \
+    sensorstablerowdelegate.cpp \
+    sensorstablemodel.cpp
 
 HEADERS  += isense.h \
-    sensorstabledialog.h
+    sensorstabledialog.h \
+    sensorstablerowdelegate.h \
+    sensorstablemodel.h
 
 FORMS    += isense.ui \
     sensorstabledialog.ui

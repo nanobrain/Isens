@@ -2,7 +2,7 @@
 #define SENSORSTABLEDIALOG_H
 
 #include <QDialog>
-#include <QStandardItemModel>
+#include "sensorstablemodel.h"
 
 namespace Ui {
 class SensorsTableDialog;
@@ -10,14 +10,15 @@ class SensorsTableDialog;
 
 class SensorsTableDialog : public QDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    explicit SensorsTableDialog(QWidget *parent = 0);
-    ~SensorsTableDialog();
+	explicit SensorsTableDialog(QWidget *parent = 0);
+	~SensorsTableDialog();
 
 private:
-    Ui::SensorsTableDialog *ui;
+	Ui::SensorsTableDialog *ui;
+	SensorsTableModel *Model;
 };
 
 #endif // SENSORSTABLEDIALOG_H

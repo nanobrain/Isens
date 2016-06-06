@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>563</width>
-    <height>362</height>
+    <width>560</width>
+    <height>360</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>560</width>
+    <height>360</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>ISense</string>
@@ -25,7 +37,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>563</width>
+     <width>560</width>
      <height>21</height>
     </rect>
    </property>
@@ -74,8 +86,11 @@
    <addaction name="actionDisconnect_all_sensors"/>
    <addaction name="actionList_all_sensors"/>
    <addaction name="separator"/>
+   <addaction name="actionAdd_table"/>
+   <addaction name="separator"/>
    <addaction name="actionOpen_database"/>
    <addaction name="actionSave_database"/>
+   <addaction name="separator"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionConnect">
@@ -90,7 +105,7 @@
   <action name="actionList_all_sensors">
    <property name="icon">
     <iconset resource="icons.qrc">
-     <normaloff>:/Icons/Icons/Table.png</normaloff>:/Icons/Icons/Table.png</iconset>
+     <normaloff>:/Icons/Icons/TableSensors.png</normaloff>:/Icons/Icons/TableSensors.png</iconset>
    </property>
    <property name="text">
     <string>List all sensors</string>
@@ -140,6 +155,18 @@
    </property>
    <property name="text">
     <string>Save database</string>
+   </property>
+  </action>
+  <action name="actionAdd_table">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/Icons/Icons/TableResults.png</normaloff>:/Icons/Icons/TableResults.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add table</string>
+   </property>
+   <property name="toolTip">
+    <string>Add table and select sensors to show in it</string>
    </property>
   </action>
  </widget>
