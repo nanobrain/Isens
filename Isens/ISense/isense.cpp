@@ -67,10 +67,6 @@ void ISense::onAddSensorDialogClose(int Result)
 		qDebug() <<"User sets:"<<endl<<"Name: "<<m_addSensorDialog->GetOutput().first <<endl<<"IP: "<< m_addSensorDialog->GetOutput().second<<endl;
 		emit AddSensorToTable ( m_addSensorDialog->GetOutput() );
 	}
-	else
-	{
-		m_addSensorDialog->clearResults();
-	}
 
 	delete m_addSensorDialog;
 	m_addSensorDialog=0;

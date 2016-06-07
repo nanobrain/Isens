@@ -14,12 +14,12 @@ class SensorsTableDialog : public QDialog
 
 public:
 	explicit SensorsTableDialog(QWidget *parent = 0);
-	void setModel(QAbstractTableModel* Model);
+	void setModel(QAbstractTableModel* m_model);
 	~SensorsTableDialog();
 
 private:
 	Ui::SensorsTableDialog *ui;
-	SensorsTableModel *Model;
+	SensorsTableModel *m_model;
 };
 
 #endif // SENSORSTABLEDIALOG_H
