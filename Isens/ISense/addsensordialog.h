@@ -1,6 +1,7 @@
 #ifndef ADDSENSORDIALOG_H
 #define ADDSENSORDIALOG_H
 
+#include <QDebug>
 #include <QDialog>
 #include <QPair>
 
@@ -15,15 +16,16 @@ class AddSensorDialog : public QDialog
 public:
 	explicit AddSensorDialog(QWidget *parent = 0);
 	~AddSensorDialog();
-
+	void clearResults();
 	QPair<QString, QString> GetOutput();
 
 private:
 	Ui::AddSensorDialog *ui;
-signals:
-	void AddSensorDialogClosing();
+	QPair<QString, QString>* m_Results;
+
 public slots:
-	void onClose();
+	void onEdit();
+	void onRejected();
 };
 
 #endif // ADDSENSORDIALOG_H

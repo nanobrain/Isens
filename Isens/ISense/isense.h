@@ -5,8 +5,12 @@
 #include <QtGui>
 #include <QMessageBox>
 #include <QTableView>
+#include <QDebug>
 #include <QDialog>
+#include <QPair>
+
 #include "sensorstabledialog.h"
+#include "sensorstablemodel.h"
 #include "addsensordialog.h"
 
 namespace Ui {
@@ -18,23 +22,23 @@ class ISense : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit ISense(QWidget *parent = 0);
+	explicit ISense(QWidget *parent = 0);
     ~ISense();
 
 private:
     Ui::ISense *ui;
-	SensorsTableDialog *sensorsTableDialog = 0;
-	AddSensorDialog *addSensorDialog = 0;
+	SensorsTableDialog *m_sensorsTableDialog = 0;
+	SensorsTableModel *m_sensorsTableModel = 0;
+	AddSensorDialog *m_addSensorDialog = 0;
 
 signals:
-	void AddSensorToTable( QPair<QString, QString> );
+	void AddSensorToTable( QPair<QString, QString> pair);
 public slots:
     void displayAbout();
-    void createSensorsTable();
-    void sensorsTableDialogClosed();
+	void createSensorsTable();
+	void onSensorsTableDialogClosed();
 	void createAddSensorDialog();
-	void onAddSensorDialogClose();
-	void onAddSensorDialogAccepted();
+	void onAddSensorDialogClose(int Result);
 
 };
 
