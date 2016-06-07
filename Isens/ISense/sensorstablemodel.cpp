@@ -3,17 +3,26 @@
 
 SensorsTableModel::SensorsTableModel(QObject *parent)
 		:QAbstractTableModel(parent)
-	{}
-SensorsTableModel::SensorsTableModel(QList< QPair<QString,QString> > pairs, QObject *parent)
+{
+	qDebug()<<"Creating Sensors Table MODEL ! 1"<<endl;
+}
+
+SensorsTableModel::SensorsTableModel(QList< QPair<QString,QString> > pairs, QObject *parent):
+	m_listOfPairs(pairs)
 {
 	Q_UNUSED(parent);
-	listOfPairs = pairs;
+	qDebug()<<"Creating Sensors Table MODEL ! 2"<<endl;
+}
+
+SensorsTableModel::~SensorsTableModel()
+{
+	qDebug()<<"Deleting Sensors Table MODEL !"<<endl;
 }
 
 int SensorsTableModel::rowCount(const QModelIndex &parent) const
 {
 	Q_UNUSED(parent);
-	return listOfPairs.size();
+	return m_listOfPairs.size();
 }
 
 int SensorsTableModel::columnCount(const QModelIndex &parent) const
@@ -27,7 +36,7 @@ QVariant SensorsTableModel::data(const QModelIndex &index, int role) const
 	if (!index.isValid())
 			return QVariant();
 
-	if (index.row() >= listOfPairs.size() || index.row() < 0)
+	if (index.row() >= m_listOfPairs.size() || index.row() < 0)
 			 return QVariant();
 
 	/*qDebug() << QString("row %1, col%2, role %3")
@@ -37,7 +46,7 @@ QVariant SensorsTableModel::data(const QModelIndex &index, int role) const
 	{
 	case Qt::DisplayRole:
 	{
-		QPair<QString, QString> pair = listOfPairs.at(index.row());
+		QPair<QString, QString> pair = m_listOfPairs.at(index.row());
 	if (index.column() == 0)
 		return pair.first;
 	else if (index.column() == 1)
@@ -86,7 +95,7 @@ bool SensorsTableModel::setData(const QModelIndex &index, const QVariant &value,
 	if (index.isValid() && role == Qt::EditRole) {
 		int row = index.row();
 
-		QPair<QString, QString> p = listOfPairs.value(row);
+		QPair<QString, QString> p = m_listOfPairs.value(row);
 
 			if (index.column() == 0)
 				p.first = value.toString();
@@ -95,7 +104,7 @@ bool SensorsTableModel::setData(const QModelIndex &index, const QVariant &value,
 	else
 		return false;
 
-	listOfPairs.replace(row, p);
+	m_listOfPairs.replace(row, p);
 		emit(dataChanged(index, index));
 
 	return true;
@@ -131,7 +140,7 @@ bool SensorsTableModel::insertRows(int position, int rows, const QModelIndex &in
 
 	 for (int row=0; row < rows; row++) {
 		 QPair<QString, QString> pair(" ", " ");
-		 listOfPairs.insert(position, pair);
+		 m_listOfPairs.insert(position, pair);
 	 }
 
 	 endInsertRows();
@@ -144,7 +153,7 @@ bool SensorsTableModel::removeRows(int position, int rows, const QModelIndex &in
 	beginRemoveRows(QModelIndex(), position, position+rows-1);
 
 	for (int row=0; row < rows; ++row) {
-		listOfPairs.removeAt(position);
+		m_listOfPairs.removeAt(position);
 	}
 
 	endRemoveRows();
@@ -162,5 +171,10 @@ Qt::ItemFlags SensorsTableModel::flags(const QModelIndex &index) const
 
 QList< QPair<QString, QString> > SensorsTableModel::getList()
 {
-	return listOfPairs;
+	return m_listOfPairs;
+}
+
+void SensorsTableModel::onAddSensorToTable(QPair<QString,QString> pair)
+{
+	qDebug()<<"AddSensorToTable";
 }

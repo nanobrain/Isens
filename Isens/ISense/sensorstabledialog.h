@@ -14,6 +14,7 @@ class SensorsTableDialog : public QDialog
 
 public:
 	explicit SensorsTableDialog(QWidget *parent = 0);
+	void setModel(QAbstractTableModel* Model);
 	~SensorsTableDialog();
 
 private:
