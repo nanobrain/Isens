@@ -5,8 +5,14 @@ AddSensorDialog::AddSensorDialog(QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::AddSensorDialog)
 {
-	m_Results = new QPair<QString,QString>("","");
+	m_Results = new QPair<QString,QString>();
 	ui->setupUi(this);
+	// Input validation
+	//ui->IPText->setInputMask("000.000.000.000");
+	QRegExpValidator *v = new QRegExpValidator(this);
+	QRegExp rx("((1{0,1}[0-9]{0,2}|2[0-4]{1,1}[0-9]{1,1}|25[0-5]{1,1})\\.){3,3}(1{0,1}[0-9]{0,2}|2[0-4]{1,1}[0-9]{1,1}|25[0-5]{1,1})");
+	v->setRegExp(rx);
+	ui->IPText->setValidator(v);
 }
 
 AddSensorDialog::~AddSensorDialog()

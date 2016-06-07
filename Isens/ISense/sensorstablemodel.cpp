@@ -47,9 +47,9 @@ QVariant SensorsTableModel::data(const QModelIndex &index, int role) const
 	case Qt::DisplayRole:
 	{
 		QPair<QString, QString> pair = m_listOfPairs.at(index.row());
-	if (index.column() == 0)
+	if (index.column() == COL_NAME)
 		return pair.first;
-	else if (index.column() == 1)
+	else if (index.column() == COL_IP)
 		return pair.second;
 	}
 		break;
@@ -57,6 +57,10 @@ QVariant SensorsTableModel::data(const QModelIndex &index, int role) const
 	case Qt::EditRole:
 	{
 		if(index.column() == COL_NAME)
+		{
+
+		}
+		else if(index.column() == COL_IP)
 		{
 
 		}
@@ -73,11 +77,6 @@ QVariant SensorsTableModel::data(const QModelIndex &index, int role) const
 	case Qt::TextAlignmentRole:
 	{
 		return Qt::AlignHCenter + Qt::AlignVCenter;
-	}
-		break;
-	case Qt::CheckStateRole:
-	{
-
 	}
 		break;
 	default:
@@ -142,7 +141,7 @@ void SensorsTableModel::addEntry(QPair<QString,QString> NewPair)
 		setData(index(0, 0, QModelIndex()), NewPair.first, Qt::EditRole);
 		setData(index(0, 1, QModelIndex()), NewPair.second, Qt::EditRole);
 	} else {
-		QMessageBox::information(0, tr("Duplicate Name"),tr("Sensor with this name and addres already exist"));
+		QMessageBox::information(0, tr("Duplicate Name"),tr("Sensor with this name and address already exist"));
 	}
 }
 
