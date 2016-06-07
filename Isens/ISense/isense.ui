@@ -223,10 +223,28 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionConnect</sender>
+   <signal>triggered()</signal>
+   <receiver>ISense</receiver>
+   <slot>createAddSensorDialog()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>179</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>displayAbout()</slot>
   <slot>createSensorsTable()</slot>
   <slot>sensorsTableClosed()</slot>
+  <slot>createAddSensorDialog()</slot>
+  <slot>onAddSensorDialogAccepted()</slot>
  </slots>
 </ui>
