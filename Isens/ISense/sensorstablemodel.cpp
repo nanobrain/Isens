@@ -125,12 +125,25 @@ QVariant SensorsTableModel::headerData(int section, Qt::Orientation orientation,
 		case 0:
 			return tr("Name");
 		case 1:
-			return tr("ID");
+			return tr("IP");
 		default:
 			return QVariant();
 		}
 	}
 	return QVariant();
+}
+
+void SensorsTableModel::addEntry(QPair<QString,QString> NewPair)
+{
+	QList< QPair<QString, QString> >list = getList();
+	// TODO: LET USER CHANGE THE NAME IF IT ALREADY EXIST !
+	if (!list.contains(NewPair)) {
+		insertRows(0, 1, QModelIndex());
+		setData(index(0, 0, QModelIndex()), NewPair.first, Qt::EditRole);
+		setData(index(0, 1, QModelIndex()), NewPair.second, Qt::EditRole);
+	} else {
+		QMessageBox::information(0, tr("Duplicate Name"),tr("Sensor with this name and addres already exist"));
+	}
 }
 
 bool SensorsTableModel::insertRows(int position, int rows, const QModelIndex &index)
@@ -177,4 +190,5 @@ QList< QPair<QString, QString> > SensorsTableModel::getList()
 void SensorsTableModel::onAddSensorToTable(QPair<QString,QString> pair)
 {
 	qDebug()<<"AddSensorToTable";
+	addEntry(pair);
 }

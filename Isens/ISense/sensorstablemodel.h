@@ -1,16 +1,17 @@
 #ifndef SENSORSTABLEMODEL_H
 #define SENSORSTABLEMODEL_H
 
-#include<QAbstractTableModel>
-#include<QDebug>
-#include<QVector>
-#include<QString>
-#include<QList>
-#include<QPair>
+#include <QAbstractTableModel>
+#include <QMessageBox>
+#include <QDebug>
+#include <QVector>
+#include <QString>
+#include <QList>
+#include <QPair>
 
 enum {
 	COL_NAME,
-	COL_ID
+	COL_IP
 };
 
 class SensorsTableModel : public QAbstractTableModel
@@ -23,6 +24,7 @@ public:
 
 	QString getStatus(const int pos) const;
 	void setStatus(const int pos, QString value) const;
+	void addEntry(QPair<QString,QString> NewPair);
 	int rowCount(const QModelIndex &parent=QModelIndex()) const Q_DECL_OVERRIDE;
 	int columnCount(const QModelIndex &parent=QModelIndex()) const Q_DECL_OVERRIDE;
 	bool insertRows(int position, int rows, const QModelIndex &index=QModelIndex()) Q_DECL_OVERRIDE;

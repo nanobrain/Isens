@@ -11,9 +11,9 @@ SensorsTableDialog::SensorsTableDialog(QWidget *parent) :
 
 }
 
-void SensorsTableDialog::setModel(QAbstractTableModel *Model)
+void SensorsTableDialog::setModel(QAbstractTableModel *m_model)
 {
-	ui->tableView->setModel(Model);
+	ui->tableView->setModel(m_model);
 }
 
 SensorsTableDialog::~SensorsTableDialog()
