@@ -38,3 +38,30 @@ void ISense::createSensorsTable()
 	//Show window
 	sensorsTableDialog->show();
 }
+
+void ISense::createAddSensorDialog()
+{
+	if(!addSensorDialog)
+	{
+		addSensorDialog = new AddSensorDialog();
+		addSensorDialog->setModal(true);
+		addSensorDialog->show();
+		connect(addSensorDialog,SIGNAL(accepted()),this,SLOT(onAddSensorDialogAccepted()));
+		connect(addSensorDialog,SIGNAL(AddSensorDialogClosing()),this,SLOT(onAddSensorDialogClose()));
+	}
+}
+
+void ISense::onAddSensorDialogAccepted()
+{
+	if(addSensorDialog->isVisible())
+	{
+		qDebug() << addSensorDialog->GetOutput().first << addSensorDialog->GetOutput().second;
+		emit AddSensorToTable ( addSensorDialog->GetOutput() );
+	}
+}
+
+void ISense::onAddSensorDialogClose()
+{
+	delete addSensorDialog;
+	addSensorDialog=0;
+}

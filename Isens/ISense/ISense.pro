@@ -15,14 +15,17 @@ TEMPLATE = app
 SOURCES += main.cpp\
         isense.cpp \
     sensorstabledialog.cpp \
-    sensorstablemodel.cpp
+    sensorstablemodel.cpp \
+    addsensordialog.cpp
 
 HEADERS  += isense.h \
     sensorstabledialog.h \
-    sensorstablemodel.h
+    sensorstablemodel.h \
+    addsensordialog.h
 
 FORMS    += isense.ui \
-    sensorstabledialog.ui
+    sensorstabledialog.ui \
+    addsensordialog.ui
 
 RESOURCES += \
     icons.qrc
