@@ -8,6 +8,7 @@ SensorsTableDialog::SensorsTableDialog(QWidget *parent) :
 	ui->setupUi(this);
 	ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	// TODO: Set minimal size of table to prevent text cropping
+	// TODO: Prevent ESC to close table
 
 }
 
