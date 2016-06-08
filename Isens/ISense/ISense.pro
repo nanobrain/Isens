@@ -31,3 +31,7 @@ FORMS    += isense.ui \
 
 RESOURCES += \
     icons.qrc
+
+DISTFILES += \
+    Server/pthreadVC2.lib \
+    Server/pthreadVC2.dll
