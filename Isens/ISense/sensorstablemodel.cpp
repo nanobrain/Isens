@@ -96,9 +96,9 @@ bool SensorsTableModel::setData(const QModelIndex &index, const QVariant &value,
 
 		QPair<QString, QString> p = m_listOfPairs.value(row);
 
-			if (index.column() == 0)
+			if (index.column() == COL_NAME)
 				p.first = value.toString();
-			else if (index.column() == 1)
+			else if (index.column() == COL_IP)
 				p.second = value.toString();
 	else
 		return false;
@@ -138,8 +138,8 @@ void SensorsTableModel::addEntry(QPair<QString,QString> NewPair)
 	// TODO: LET USER CHANGE THE NAME IF IT ALREADY EXIST !
 	if (!list.contains(NewPair)) {
 		insertRows(0, 1, QModelIndex());
-		setData(index(0, 0, QModelIndex()), NewPair.first, Qt::EditRole);
-		setData(index(0, 1, QModelIndex()), NewPair.second, Qt::EditRole);
+		setData(index(0, COL_NAME, QModelIndex()), NewPair.first, Qt::EditRole);
+		setData(index(0, COL_IP, QModelIndex()), NewPair.second, Qt::EditRole);
 	} else {
 		QMessageBox::information(0, tr("Duplicate Name"),tr("Sensor with this name and address already exist"));
 	}
