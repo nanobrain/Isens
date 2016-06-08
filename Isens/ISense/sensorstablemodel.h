@@ -43,6 +43,7 @@ signals:
 
 public slots:
 	void onAddSensorToTable(QPair<QString,QString> pair);
+	void onUpdateSensorList();
 };
 
 #endif // SENSORSTABLEMODEL_H

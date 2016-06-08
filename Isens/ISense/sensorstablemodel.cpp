@@ -1,4 +1,5 @@
 #include "sensorstablemodel.h"
+#include "isense.h"
 #include <typeinfo>
 
 SensorsTableModel::SensorsTableModel(QObject *parent)
@@ -17,6 +18,7 @@ SensorsTableModel::SensorsTableModel(QList< QPair<QString,QString> > pairs, QObj
 SensorsTableModel::~SensorsTableModel()
 {
 	qDebug()<<"Deleting Sensors Table MODEL !"<<endl;
+	m_sensorsTableModel=0;
 }
 
 int SensorsTableModel::rowCount(const QModelIndex &parent) const
@@ -190,4 +192,9 @@ void SensorsTableModel::onAddSensorToTable(QPair<QString,QString> pair)
 {
 	qDebug()<<"AddSensorToTable";
 	addEntry(pair);
+}
+
+void SensorsTableModel::onUpdateSensorList()
+{
+	/**/
 }

@@ -5,6 +5,7 @@ ISense::ISense(QWidget *parent) :
 	QMainWindow(parent),
 	ui(new Ui::ISense)
 {
+	qDebug()<<"Created ISense"<<endl;
 	//Create Sensors Table Dialog model
 	m_sensorsTableModel = new SensorsTableModel(this); // TODO: MAKE IT SINGLETON
 	connect(this,SIGNAL(AddSensorToTable(QPair<QString,QString>)),m_sensorsTableModel,SLOT(onAddSensorToTable(QPair<QString,QString>)));

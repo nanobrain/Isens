@@ -11,7 +11,11 @@
 
 #include "sensorstabledialog.h"
 #include "sensorstablemodel.h"
+#include "connectioncontroller.h"
 #include "addsensordialog.h"
+
+extern SensorsTableModel *m_sensorsTableModel;
+extern ConnectionController *m_connectionController;
 
 namespace Ui {
 class ISense;
@@ -28,7 +32,6 @@ public:
 private:
     Ui::ISense *ui;
 	SensorsTableDialog *m_sensorsTableDialog = 0;
-	SensorsTableModel *m_sensorsTableModel = 0;
 	AddSensorDialog *m_addSensorDialog = 0;
 
 signals:
