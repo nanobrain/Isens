@@ -16,12 +16,14 @@ SOURCES += main.cpp\
         isense.cpp \
     sensorstabledialog.cpp \
     sensorstablemodel.cpp \
-    addsensordialog.cpp
+    addsensordialog.cpp \
+    connectioncontroller.cpp
 
 HEADERS  += isense.h \
     sensorstabledialog.h \
     sensorstablemodel.h \
-    addsensordialog.h
+    addsensordialog.h \
+    connectioncontroller.h
 
 FORMS    += isense.ui \
     sensorstabledialog.ui \
