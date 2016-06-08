@@ -24,11 +24,13 @@ void ConnectionController::disconnectFromServer()
 
 QPair<QString,QString> ConnectionController::getSensorsList()
 {
-    QPair<QString,QString> data = pSocket->readAll();
-    return data;
+    QPair<QString,QString> list={"",""};
+    //QByteArraydata = pSocket->readAll();
+
+    return list;
 }
 
-void updateSensorsList()
+void ConnectionController::readTcpData()
 {
-
+/* Read data */
 }

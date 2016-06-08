@@ -22,6 +22,7 @@ private:
 signals:
 	void updateSensorsList();
 public slots:
+    void readTcpData();
 };
 
 #endif // CONNECTIONCONTROLLER_H
