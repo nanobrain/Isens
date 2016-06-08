@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QPair>
 #include <QString>
+#include <QVector>
 
 class ConnectionController : public QObject
 {
@@ -12,7 +13,7 @@ public:
 	explicit ConnectionController(QObject *parent = 0);
 	int connectToServer();
 	int disconnectFromServer();
-	QPair<QString,QString> getSensorsList();
+	QVector< QPair<QString,QString> > getSensorsList();
 
 signals:
 	void updateSensorsList();
