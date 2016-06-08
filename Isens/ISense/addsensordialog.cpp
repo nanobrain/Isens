@@ -1,6 +1,6 @@
 #include "addsensordialog.h"
 #include "ui_addsensordialog.h"
-
+/* Test Pushup */
 AddSensorDialog::AddSensorDialog(QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::AddSensorDialog)
