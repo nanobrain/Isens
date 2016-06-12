@@ -31,7 +31,6 @@ private:
 	SensorsTableDialog* m_sensorsTableDialog = NULL;
 
 signals:
-	void AddSensorToTable( Sensor* );
 public slots:
     void displayAbout();
 	void createSensorsTable();

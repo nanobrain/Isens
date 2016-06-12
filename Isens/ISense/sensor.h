@@ -13,7 +13,11 @@ public:
 	explicit Sensor(QObject *parent);
 	explicit Sensor(QObject *parent,QString a_name,QString a_ID);
 	// Copy constructor
+	Sensor(QObject *parent, const Sensor& sen);
+	// Assignment operator
 	Sensor& operator=(const Sensor& right);
+	// Compare operator
+	bool operator==(const Sensor& right);
 	~Sensor();
 	QString toString(){return m_name;}
 	QString name(){return m_name;}

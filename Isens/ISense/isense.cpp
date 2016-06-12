@@ -13,7 +13,6 @@ ISense::ISense(QWidget *parent) :
 	QVector<Sensor*> vSens;
 	vSens.push_back(sen);
 	m_sensorsTableModel = new SensorsTableModel(this,vSens); // TODO: MAKE IT SINGLETON
-	connect(this,SIGNAL(AddSensorToTable(Sensor*)),m_sensorsTableModel,SLOT(onAddSensorToTable(Sensor* sen)));
 	ui->setupUi(this);
 }
 

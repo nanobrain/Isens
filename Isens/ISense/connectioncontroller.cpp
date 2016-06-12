@@ -1,11 +1,14 @@
 #include "connectioncontroller.h"
 
+
+// TODO: ADD STATUS BAR TO INFORM WHETHER APP IS CONNECTED OR NOT
+
+
 extern SensorsTableModel* m_sensorsTableModel;
 
 ConnectionController::ConnectionController(QObject *parent) : QObject(parent)
 {
 	qDebug()<<"Created ConnectionControler"<<endl;
-	connect(this,SIGNAL(appendSensorsToTable(Sensor*)),m_sensorsTableModel,SLOT(onAddSensorToTable(Sensor*)));
 }
 
 ConnectionController::~ConnectionController()
@@ -16,8 +19,9 @@ ConnectionController::~ConnectionController()
 void ConnectionController::connectToServer()
 {
 	bool reconnect=1;
+        m_pSocket= new QTcpSocket(this); // <-- needs to be a member variable: QTcm_pSocket* _pSocket;
 
-	m_pSocket= new QTcpSocket(this); // <-- needs to be a member variable: QTcm_pSocket* _pSocket;
+	connect(this,SIGNAL(appendSensorsToTable(QVector<Sensor*>)),m_sensorsTableModel,SLOT(onAddSensorsToTable(QVector<Sensor*>)));
 	connect( m_pSocket, SIGNAL(readyRead()), SLOT(readTcpData()) );
 
 	while(reconnect)
@@ -57,18 +61,16 @@ QVector<Sensor*> ConnectionController::getSensorsList()
 }
 void ConnectionController::listSensors()
 {
-	/*
 	m_pSocket->write(SERVER_CMD_LIST);
-	QPair<QString,QString> List = getSensorsList();
-	emit appendSensorsToTable(List);
-	*/
+	QVector<Sensor*> vecSen = getSensorsList();
+	emit appendSensorsToTable(vecSen);
 }
 
 void ConnectionController::readTcpData()
 {
 	QString result;
 	result = static_cast<QString>(m_pSocket->readAll());
-	qDebug()<< result.split("\r\n",QString::SkipEmptyParts);
+	qDebug()<< result.split("\r\n");
 	// TODO: ADD SENSORS TO TABLE MODEL
 	QVector<Sensor*> vecSen;
 	m_sensorsTableModel->addEntries(vecSen);
