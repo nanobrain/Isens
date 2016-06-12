@@ -4,6 +4,7 @@
 //#include "commons.h"
 #include "sensorstablemodel.h"
 #include "sensorstabledialog.h"
+#include "connectioncontroller.h"
 #include <QMessageBox>
 #include <QMainWindow>
 #include <QtGui>

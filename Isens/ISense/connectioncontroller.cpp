@@ -44,19 +44,16 @@ void ConnectionController::disconnectFromServer()
 	m_pSocket->disconnectFromHost();
 }
 
-QVector<QPair<QString,QString>> ConnectionController::getSensorsList()
+QVector<Sensor*> ConnectionController::getSensorsList()
 {
-	QPair<QString,QString> List={"",""};
-	//QPair<QString,QString> DataVector;
+	QVector<Sensor*> vecSen;
 
 	QByteArray Data = m_pSocket->readAll();
 	QString Name = static_cast<QString>(Data);
-	List.first=Name;
-	List.second="132.132.321.213";
+	Sensor* sen= new Sensor(0,Name,"Default ID");
+	vecSen.push_back(sen);
 
-	//DataVector.push_back(List);
-
-	return List;
+	return vecSen;
 }
 void ConnectionController::listSensors()
 {

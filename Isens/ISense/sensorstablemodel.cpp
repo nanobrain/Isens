@@ -16,7 +16,6 @@ SensorsTableModel::SensorsTableModel(QObject *parent, QVector<Sensor*> vecSen):
 SensorsTableModel::~SensorsTableModel()
 {
 	qDebug()<<"Deleting Sensors Table MODEL !"<<endl;
-	m_sensorsTableModel=0;
 }
 
 int SensorsTableModel::rowCount(const QModelIndex &parent) const
@@ -201,11 +200,6 @@ void SensorsTableModel::onAddSensorsToTable(QVector<Sensor*> vSen)
 {
 	qDebug()<<"AddSensorsToTable";
 	addEntries(vSen);
-}
-
-void SensorsTableModel::onUpdateSensorList()
-{
-	/**/
 }
 
 void SensorsTableModel::onUpdateSensorList()

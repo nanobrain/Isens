@@ -23,7 +23,7 @@ public:
     void connectToServer();
     void disconnectFromServer();
 	void listSensors();
-	QPair<QString, QString> getSensorsList();
+	QVector<Sensor*> getSensorsList();
 private:
 	void introduceMyself();
 	QTcpSocket* m_pSocket;
