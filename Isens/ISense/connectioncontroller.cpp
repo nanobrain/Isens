@@ -22,7 +22,7 @@ void ConnectionController::connectToServer()
 
 	while(reconnect)
 	{
-		m_pSocket->connectToHost("192.168.1.168", 1666); // Server returns: "Sensor:"
+		m_pSocket->connectToHost("127.1.1.1", 1666); // Server returns: "Sensor:"
 		if( m_pSocket->waitForConnected(SERVER_RECONNECT_TIME) )
 		{
 			//introduceMyself();
@@ -69,10 +69,9 @@ void ConnectionController::readTcpData()
 	QString result;
 	result = static_cast<QString>(m_pSocket->readAll());
 	qDebug()<< result.split("\r\n",QString::SkipEmptyParts);
-	QPair<QString,QString> list;
-	list.first="nazwa";
-	list.second="adres";
-	//m_sensorsTableModel->addEntry(list);
+	// TODO: ADD SENSORS TO TABLE MODEL
+	QVector<Sensor*> vecSen;
+	m_sensorsTableModel->addEntries(vecSen);
 }
 
 void ConnectionController::introduceMyself(){/**/}
