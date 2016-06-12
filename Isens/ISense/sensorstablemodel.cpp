@@ -1,6 +1,4 @@
 #include "sensorstablemodel.h"
-#include "isense.h"
-#include <typeinfo>
 
 SensorsTableModel::SensorsTableModel(QObject *parent)
 		:QAbstractTableModel(parent)
@@ -8,8 +6,8 @@ SensorsTableModel::SensorsTableModel(QObject *parent)
 	qDebug()<<"Creating Sensors Table MODEL ! 1"<<endl;
 }
 
-SensorsTableModel::SensorsTableModel(QList< QPair<QString,QString> > pairs, QObject *parent):
-	m_listOfPairs(pairs)
+SensorsTableModel::SensorsTableModel(QObject *parent, QVector<Sensor*> vecSen):
+	m_SensorList(vecSen)
 {
 	Q_UNUSED(parent);
 	qDebug()<<"Creating Sensors Table MODEL ! 2"<<endl;
@@ -24,7 +22,7 @@ SensorsTableModel::~SensorsTableModel()
 int SensorsTableModel::rowCount(const QModelIndex &parent) const
 {
 	Q_UNUSED(parent);
-	return m_listOfPairs.size();
+	return m_SensorList.size();
 }
 
 int SensorsTableModel::columnCount(const QModelIndex &parent) const
@@ -38,7 +36,7 @@ QVariant SensorsTableModel::data(const QModelIndex &index, int role) const
 	if (!index.isValid())
 			return QVariant();
 
-	if (index.row() >= m_listOfPairs.size() || index.row() < 0)
+	if (index.row() >= m_SensorList.size() || index.row() < 0)
 			 return QVariant();
 
 	/*qDebug() << QString("row %1, col%2, role %3")
@@ -48,11 +46,11 @@ QVariant SensorsTableModel::data(const QModelIndex &index, int role) const
 	{
 	case Qt::DisplayRole:
 	{
-		QPair<QString, QString> pair = m_listOfPairs.at(index.row());
+		Sensor* sen = m_SensorList.at(index.row());
 	if (index.column() == COL_NAME)
-		return pair.first;
+		return sen->name();
 	else if (index.column() == COL_IP)
-		return pair.second;
+		return sen->ID();
 	}
 		break;
 		/*
@@ -96,16 +94,16 @@ bool SensorsTableModel::setData(const QModelIndex &index, const QVariant &value,
 	if (index.isValid() && role == Qt::EditRole) {
 		int row = index.row();
 
-		QPair<QString, QString> p = m_listOfPairs.value(row);
+		Sensor* sen = m_SensorList.value(row);
 
 			if (index.column() == COL_NAME)
-				p.first = value.toString();
+				sen->name() = value.toString();
 			else if (index.column() == COL_IP)
-				p.second = value.toString();
+				sen->ID() = value.toString();
 	else
 		return false;
 
-	m_listOfPairs.replace(row, p);
+	m_SensorList.replace(row, sen);
 		emit(dataChanged(index, index));
 
 	return true;
@@ -134,17 +132,22 @@ QVariant SensorsTableModel::headerData(int section, Qt::Orientation orientation,
 	return QVariant();
 }
 
-void SensorsTableModel::addEntry(QPair<QString,QString> NewPair)
+void SensorsTableModel::addEntry(Sensor* sen)
 {
-	QList< QPair<QString, QString> >list = getList();
-	// TODO: LET USER CHANGE THE NAME IF IT ALREADY EXIST !
-	if (!list.contains(NewPair)) {
+	if (!getList().contains(sen)) {
 		insertRows(0, 1, QModelIndex());
-		setData(index(0, COL_NAME, QModelIndex()), NewPair.first, Qt::EditRole);
-		setData(index(0, COL_IP, QModelIndex()), NewPair.second, Qt::EditRole);
+		setData(index(0, COL_NAME, QModelIndex()), sen->name(), Qt::EditRole);
+		setData(index(0, COL_IP, QModelIndex()), sen->ID(), Qt::EditRole);
 	} else {
+		// TODO: LET USER CHANGE THE NAME IF IT ALREADY EXIST !
 		QMessageBox::information(0, tr("Duplicate Name"),tr("Sensor with this name and address already exist"));
 	}
+}
+
+void SensorsTableModel::addEntries(QVector<Sensor*> vSensors)
+{
+	foreach(Sensor* sen,vSensors)
+		addEntry(sen);
 }
 
 bool SensorsTableModel::insertRows(int position, int rows, const QModelIndex &index)
@@ -153,8 +156,8 @@ bool SensorsTableModel::insertRows(int position, int rows, const QModelIndex &in
 	 beginInsertRows(QModelIndex(), position, position+rows-1);
 
 	 for (int row=0; row < rows; row++) {
-		 QPair<QString, QString> pair(" ", " ");
-		 m_listOfPairs.insert(position, pair);
+		 Sensor* sen;
+		 m_SensorList.insert(position, sen);
 	 }
 
 	 endInsertRows();
@@ -167,7 +170,7 @@ bool SensorsTableModel::removeRows(int position, int rows, const QModelIndex &in
 	beginRemoveRows(QModelIndex(), position, position+rows-1);
 
 	for (int row=0; row < rows; ++row) {
-		m_listOfPairs.removeAt(position);
+		m_SensorList.removeAt(position);
 	}
 
 	endRemoveRows();
@@ -183,15 +186,26 @@ Qt::ItemFlags SensorsTableModel::flags(const QModelIndex &index) const
 	// return Qt::ItemIsSelectable | Qt::ItemIsUserCheckable |  Qt::ItemIsEditable | Qt::ItemIsEnabled;// | QAbstractTableModel::flags(index);
 }
 
-QList< QPair<QString, QString> > SensorsTableModel::getList()
+QVector<Sensor*> SensorsTableModel::getList()
 {
-	return m_listOfPairs;
+	return m_SensorList;
 }
 
-void SensorsTableModel::onAddSensorToTable(QPair<QString,QString> pair)
+void SensorsTableModel::onAddSensorToTable(Sensor* sen)
 {
 	qDebug()<<"AddSensorToTable";
-	addEntry(pair);
+	addEntry(sen);
+}
+
+void SensorsTableModel::onAddSensorsToTable(QVector<Sensor*> vSen)
+{
+	qDebug()<<"AddSensorsToTable";
+	addEntries(vSen);
+}
+
+void SensorsTableModel::onUpdateSensorList()
+{
+	/**/
 }
 
 void SensorsTableModel::onUpdateSensorList()

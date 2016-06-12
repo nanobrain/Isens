@@ -53,7 +53,6 @@
     <property name="title">
      <string>Sensor</string>
     </property>
-    <addaction name="actionConnect"/>
     <addaction name="actionList_all_sensors"/>
     <addaction name="separator"/>
     <addaction name="actionDisconnect_all_sensors"/>
@@ -82,7 +81,6 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionConnect"/>
    <addaction name="actionDisconnect_all_sensors"/>
    <addaction name="actionList_all_sensors"/>
    <addaction name="separator"/>
@@ -93,15 +91,6 @@
    <addaction name="separator"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionConnect">
-   <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/Icons/Icons/Add.png</normaloff>:/Icons/Icons/Add.png</iconset>
-   </property>
-   <property name="text">
-    <string>Add new sensor</string>
-   </property>
-  </action>
   <action name="actionList_all_sensors">
    <property name="icon">
     <iconset resource="icons.qrc">
@@ -223,28 +212,10 @@
     </hint>
    </hints>
   </connection>
-  <connection>
-   <sender>actionConnect</sender>
-   <signal>triggered()</signal>
-   <receiver>ISense</receiver>
-   <slot>createAddSensorDialog()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>279</x>
-     <y>179</y>
-    </hint>
-   </hints>
-  </connection>
  </connections>
  <slots>
   <slot>displayAbout()</slot>
   <slot>createSensorsTable()</slot>
   <slot>sensorsTableClosed()</slot>
-  <slot>createAddSensorDialog()</slot>
-  <slot>onAddSensorDialogAccepted()</slot>
  </slots>
 </ui>

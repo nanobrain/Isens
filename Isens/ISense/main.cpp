@@ -1,5 +1,7 @@
 #include "isense.h"
+//#include "commons.h"
 #include <QApplication>
+#include "connectioncontroller.h"
 
 SensorsTableModel *m_sensorsTableModel=0;
 ConnectionController *m_connectionController=0;

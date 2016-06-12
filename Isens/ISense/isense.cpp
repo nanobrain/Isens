@@ -1,14 +1,19 @@
 #include "isense.h"
 #include "ui_isense.h"
 
+extern SensorsTableModel* m_sensorsTableModel;
+
 ISense::ISense(QWidget *parent) :
 	QMainWindow(parent),
 	ui(new Ui::ISense)
 {
 	qDebug()<<"Created ISense"<<endl;
 	//Create Sensors Table Dialog model
-	m_sensorsTableModel = new SensorsTableModel(this); // TODO: MAKE IT SINGLETON
-	connect(this,SIGNAL(AddSensorToTable(QPair<QString,QString>)),m_sensorsTableModel,SLOT(onAddSensorToTable(QPair<QString,QString>)));
+	Sensor* sen= new Sensor(this,"Name","999");
+	QVector<Sensor*> vSens;
+	vSens.push_back(sen);
+	m_sensorsTableModel = new SensorsTableModel(this,vSens); // TODO: MAKE IT SINGLETON
+	connect(this,SIGNAL(AddSensorToTable(Sensor*)),m_sensorsTableModel,SLOT(onAddSensorToTable(Sensor* sen)));
 	ui->setupUi(this);
 }
 
@@ -17,6 +22,9 @@ ISense::~ISense()
 	delete ui;
 }
 
+
+// TODO: ALL THOSE METHODS AND FUNCTIONALLITIES SHOULD BE MOVED TO CONTROLLER CLASS
+// THIS CLASS IS JUST FOR MAIN WINDOW, NOT FOR APP FUNCTIONALLITY
 // Slots definitions
 void ISense::displayAbout()
 {
@@ -46,29 +54,4 @@ void ISense::createSensorsTable()
 	ui->mdiArea->addSubWindow(m_sensorsTableDialog,Qt::Window);
 	//Show window
 	m_sensorsTableDialog->show();
-}
-
-void ISense::createAddSensorDialog()
-{
-	if(!m_addSensorDialog)
-	{
-		m_addSensorDialog = new AddSensorDialog();
-		m_addSensorDialog->setModal(true);
-		connect(m_addSensorDialog,SIGNAL(finished(int)),this,SLOT(onAddSensorDialogClose(int)));
-		m_addSensorDialog->show();
-	}
-	else
-		qDebug()<<"ERROR";
-}
-
-void ISense::onAddSensorDialogClose(int Result)
-{
-	if(Result == QDialog::Accepted)
-	{
-		qDebug() <<"User sets:"<<endl<<"Name: "<<m_addSensorDialog->GetOutput().first <<endl<<"IP: "<< m_addSensorDialog->GetOutput().second<<endl;
-		emit AddSensorToTable ( m_addSensorDialog->GetOutput() );
-	}
-
-	delete m_addSensorDialog;
-	m_addSensorDialog=0;
 }
