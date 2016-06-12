@@ -29,7 +29,7 @@ private:
 	QTcpSocket* m_pSocket;
 
 signals:
-	void appendSensorstoTable( QVector<Sensor*> );
+	void appendSensorsToTable( QVector<Sensor*> );
 public slots:
     void readTcpData();
 };
