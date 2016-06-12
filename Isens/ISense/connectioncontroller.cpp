@@ -1,33 +1,32 @@
-#include "isense.h"
 #include "connectioncontroller.h"
+
+extern SensorsTableModel* m_sensorsTableModel;
 
 ConnectionController::ConnectionController(QObject *parent) : QObject(parent)
 {
 	qDebug()<<"Created ConnectionControler"<<endl;
+	connect(this,SIGNAL(appendSensorsToTable(Sensor*)),m_sensorsTableModel,SLOT(onAddSensorToTable(Sensor*)));
 }
 
 ConnectionController::~ConnectionController()
 {
-	pSocket->write(SERVER_CMD_EXIT);
-	delete m_connectionController;
-	m_connectionController=0;
+	m_pSocket->write(SERVER_CMD_EXIT);
 }
 
 void ConnectionController::connectToServer()
 {
 	bool reconnect=1;
-	connect(m_connectionController,SIGNAL(updateSensorsList(QPair<QString,QString>)),m_sensorsTableModel,SLOT(onAddSensorToTable(QPair<QString,QString>)));
 
-    pSocket = new QTcpSocket(this); // <-- needs to be a member variable: QTcpSocket * _pSocket;
-    connect( pSocket, SIGNAL(readyRead()), SLOT(readTcpData()) );
+	m_pSocket= new QTcpSocket(this); // <-- needs to be a member variable: QTcm_pSocket* _pSocket;
+	connect( m_pSocket, SIGNAL(readyRead()), SLOT(readTcpData()) );
 
 	while(reconnect)
 	{
-		pSocket->connectToHost("192.168.1.168", 1666); // Server returns: "Sensor:"
-		if( pSocket->waitForConnected(SERVER_RECONNECT_TIME) )
+		m_pSocket->connectToHost("192.168.1.168", 1666); // Server returns: "Sensor:"
+		if( m_pSocket->waitForConnected(SERVER_RECONNECT_TIME) )
 		{
-			//introduceYourself();
-			pSocket->write(SERVER_CMD_MY_NAME);
+			//introduceMyself();
+			m_pSocket->write(SERVER_CMD_MY_NAME);
 			reconnect=0;
 		}
 		else
@@ -38,39 +37,45 @@ void ConnectionController::connectToServer()
 					reconnect=0;
 			}
 	}
-	listSensors();
 }
 
 void ConnectionController::disconnectFromServer()
 {
-    pSocket->disconnectFromHost();
+	m_pSocket->disconnectFromHost();
 }
 
 QVector<QPair<QString,QString>> ConnectionController::getSensorsList()
 {
 	QPair<QString,QString> List={"",""};
-	QVector<QPair<QString,QString>> DataVector;
+	//QPair<QString,QString> DataVector;
 
-	QByteArray Data = pSocket->readAll();
+	QByteArray Data = m_pSocket->readAll();
 	QString Name = static_cast<QString>(Data);
 	List.first=Name;
 	List.second="132.132.321.213";
 
-	DataVector.push_back(List);
+	//DataVector.push_back(List);
 
-	return DataVector;
+	return List;
 }
 void ConnectionController::listSensors()
 {
-	pSocket->write(SERVER_CMD_LIST);
-	//QVecotr<QPair<QString,QString>> List = getSensorsList();
-	//emit updateSensorsList(List);
+	/*
+	m_pSocket->write(SERVER_CMD_LIST);
+	QPair<QString,QString> List = getSensorsList();
+	emit appendSensorsToTable(List);
+	*/
 }
 
 void ConnectionController::readTcpData()
 {
 	QString result;
-	result = static_cast<QString>(pSocket->readAll());
+	result = static_cast<QString>(m_pSocket->readAll());
 	qDebug()<< result.split("\r\n",QString::SkipEmptyParts);
+	QPair<QString,QString> list;
+	list.first="nazwa";
+	list.second="adres";
+	//m_sensorsTableModel->addEntry(list);
 }
-void ConnectionController::introduceYourself(){/**/}
+
+void ConnectionController::introduceMyself(){/**/}

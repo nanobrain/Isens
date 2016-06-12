@@ -16,18 +16,18 @@ SOURCES += main.cpp\
         isense.cpp \
     sensorstabledialog.cpp \
     sensorstablemodel.cpp \
-    addsensordialog.cpp \
-    connectioncontroller.cpp
+    connectioncontroller.cpp \
+    sensor.cpp
 
 HEADERS  += isense.h \
     sensorstabledialog.h \
     sensorstablemodel.h \
-    addsensordialog.h \
-    connectioncontroller.h
+    connectioncontroller.h \
+    sensor.h \
+    commons.h
 
 FORMS    += isense.ui \
-    sensorstabledialog.ui \
-    addsensordialog.ui
+    sensorstabledialog.ui
 
 RESOURCES += \
     icons.qrc

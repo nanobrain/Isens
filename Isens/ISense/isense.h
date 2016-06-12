@@ -1,18 +1,14 @@
 #ifndef ISENSE_H
 #define ISENSE_H
 
+//#include "commons.h"
+#include "sensorstablemodel.h"
+#include "sensorstabledialog.h"
+#include <QMessageBox>
 #include <QMainWindow>
 #include <QtGui>
-#include <QMessageBox>
 #include <QTableView>
-#include <QDebug>
 #include <QDialog>
-#include <QPair>
-
-#include "sensorstabledialog.h"
-#include "sensorstablemodel.h"
-#include "connectioncontroller.h"
-#include "addsensordialog.h"
 
 extern SensorsTableModel *m_sensorsTableModel;
 extern ConnectionController *m_connectionController;
@@ -30,18 +26,15 @@ public:
     ~ISense();
 
 private:
-    Ui::ISense *ui;
-	SensorsTableDialog *m_sensorsTableDialog = 0;
-	AddSensorDialog *m_addSensorDialog = 0;
+	Ui::ISense* ui;
+	SensorsTableDialog* m_sensorsTableDialog = NULL;
 
 signals:
-	void AddSensorToTable( QPair<QString, QString> pair);
+	void AddSensorToTable( Sensor* );
 public slots:
     void displayAbout();
 	void createSensorsTable();
-	void onSensorsTableDialogClosed();
-	void createAddSensorDialog();
-	void onAddSensorDialogClose(int Result);
+	void onSensorsTableDialogClosed();	
 
 };
 

@@ -1,16 +1,12 @@
 #ifndef CONNECTIONCONTROLLER_H
 #define CONNECTIONCONTROLLER_H
 
-#include <QObject>
-#include <QPair>
-#include <QString>
-#include <QVector>
 #include <QAbstractSocket>
 #include <QByteArray>
 #include <QTcpSocket>
-#include <QDebug>
-#include <QPair>
-#include <QString>
+#include <QVector>
+//#include "commons.h"
+#include "sensor.h"
 #include "sensorstablemodel.h"
 
 #define SERVER_CMD_LIST "list\r\n"
@@ -27,13 +23,13 @@ public:
     void connectToServer();
     void disconnectFromServer();
 	void listSensors();
-	QVector<QPair<QString, QString> > getSensorsList();
+	QPair<QString, QString> getSensorsList();
 private:
-	void introduceYourself();
-    QTcpSocket *pSocket;
+	void introduceMyself();
+	QTcpSocket* m_pSocket;
 
 signals:
-	void updateSensorsList( QPair<QString,QString> );
+	void appendSensorstoTable( QVector<Sensor*> );
 public slots:
     void readTcpData();
 };
