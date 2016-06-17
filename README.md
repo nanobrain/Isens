@@ -32,3 +32,7 @@ Former, undone: https://www.lucidchart.com/invitations/accept/1be87fe7-1402-4bbe
 
 TCP server:
 https://github.com/kacaperek/TCPserver
+
+
+Revised version:
+https://github.com/nanobrain/ISense_Revised
